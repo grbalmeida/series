@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Button } from 'react-native'
 
 import FormRow from '../components/FormRow'
 import Input from '../components/Input'
@@ -18,6 +18,10 @@ export default class LoginPage extends Component {
     this.setState({
       [field]: value
     })
+  }
+
+  tryLogin () {
+    console.log(this.state)
   }
 
   render () {
@@ -40,6 +44,10 @@ export default class LoginPage extends Component {
             secureTextEntry
           />
         </FormRow>
+        <Button
+          title='Login'
+          onPress={() => this.tryLogin()}
+        />
       </View>
     )
   }
