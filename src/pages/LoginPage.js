@@ -1,10 +1,18 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React, { Component } from 'react'
+import { View, TextInput } from 'react-native'
 
-const LoginScreen = () => (
-  <View>
-    <Text>Login</Text>
-  </View>
-)
+import FormRow from '../components/FormRow'
 
-export default LoginScreen
+export default class LoginPage extends Component {
+  render () {
+    return (
+      <View>
+        <FormRow>
+          <TextInput
+            underlineColorAndroid='#c5c5c5'
+          />
+        </FormRow>
+      </View>
+    )
+  }
+}
