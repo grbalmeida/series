@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Button } from 'react-native'
+import { View, Button, StyleSheet } from 'react-native'
 
 import FormRow from '../components/FormRow'
 import Input from '../components/Input'
@@ -28,15 +28,15 @@ export default class LoginPage extends Component {
     const { email, password } = this.state
 
     return (
-      <View>
-        <FormRow>
+      <View style={styles.container}>
+        <FormRow first>
           <Input
             placeholder='Email'
             value={email}
             onChangeText={email => this.onChangeHandler('email', email)}
           />
         </FormRow>
-        <FormRow>
+        <FormRow last>
           <Input
             placeholder='Password'
             value={password}
@@ -52,3 +52,10 @@ export default class LoginPage extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingLeft: 10,
+    paddingRight: 10
+  }
+})
