@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
-import { View, Button, StyleSheet, ActivityIndicator } from 'react-native'
+import {
+  View,
+  Button,
+  StyleSheet,
+  ActivityIndicator
+} from 'react-native'
 import firebase from '../services/firebase'
 
 import FormRow from '../components/FormRow'
 import Input from '../components/Input'
+import ErrorMessage from '../components/ErrorMessage'
 
 export default class LoginPage extends Component {
   constructor (props) {
@@ -12,7 +18,8 @@ export default class LoginPage extends Component {
     this.state = {
       email: '',
       password: '',
-      isLoading: false
+      isLoading: false,
+      errorCode: ''
     }
   }
 
@@ -31,29 +38,26 @@ export default class LoginPage extends Component {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(user => {
-        console.log('Authenticated user', user)
+        console.log(user)
+        this.setState({ errorCode: '' })
       })
       .catch(error => {
-        console.log('User not found', error)
+        this.setState({ errorCode: error.code })
       })
       .finally(() => this.setState({ isLoading: false }))
   }
 
-  renderButton () {
-    if (this.state.isLoading) {
-      return <ActivityIndicator />
+  getMessageByErrorCode (errorCode) {
+    const messages = {
+      'auth/wrong-password': 'Incorret password',
+      'auth/user-not-found': 'User not found'
     }
 
-    return (
-      <Button
-        title='Login'
-        onPress={() => this.tryLogin()}
-      />
-    )
+    return messages[errorCode] || 'Incorrect email or password'
   }
 
   render () {
-    const { email, password } = this.state
+    const { email, password, errorCode, isLoading } = this.state
 
     return (
       <View style={styles.container}>
@@ -72,7 +76,18 @@ export default class LoginPage extends Component {
             secureTextEntry
           />
         </FormRow>
-        {this.renderButton()}
+        {isLoading && <ActivityIndicator />}
+        {!isLoading &&
+          <Button
+            title='Login'
+            onPress={() => this.tryLogin()}
+          />
+        }
+        {!!errorCode &&
+          <ErrorMessage
+            message={this.getMessageByErrorCode(errorCode)}
+          />
+        }
       </View>
     )
   }
