@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Button, StyleSheet } from 'react-native'
+import firebase from '../services/firebase'
 
 import FormRow from '../components/FormRow'
 import Input from '../components/Input'
@@ -12,6 +13,18 @@ export default class LoginPage extends Component {
       email: '',
       password: ''
     }
+  }
+
+  componentDidMount () {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword('teste@gmail.com', '123123')
+      .then(user => {
+        console.log('Authenticated user', user)
+      })
+      .catch(error => {
+        console.log('User not found', error)
+      })
   }
 
   onChangeHandler (field, value) {
