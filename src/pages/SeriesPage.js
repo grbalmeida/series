@@ -3,13 +3,17 @@ import { View, FlatList } from 'react-native'
 
 import SerieCard from '../components/SerieCard'
 import series from '../fake-data/series.json'
+import isEven from '../util'
 
 const SeriesPage = () => (
   <View>
     <FlatList
       data={series}
-      renderItem={({ item }) => (
-        <SerieCard serie={item} />
+      renderItem={({ item, index }) => (
+        <SerieCard
+          serie={item}
+          isFirstColumn={isEven(index)}
+        />
       )}
       keyExtractor={item => `${item.id}`}
       numColumns={2}
