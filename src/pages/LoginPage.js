@@ -3,16 +3,16 @@ import {
   View,
   Button,
   StyleSheet,
-  ActivityIndicator,
-  Alert
+  ActivityIndicator
 } from 'react-native'
-import firebase from '../services/firebase'
+import { connect } from 'react-redux'
 
+import { tryLogin } from '../redux/action-creators'
 import FormRow from '../components/FormRow'
 import Input from '../components/Input'
 import ErrorMessage from '../components/ErrorMessage'
 
-export default class LoginPage extends Component {
+class LoginPage extends Component {
   constructor (props) {
     super(props)
 
@@ -30,51 +30,27 @@ export default class LoginPage extends Component {
     })
   }
 
-  showAlert () {
-    Alert.alert(
-      'User not found',
-      'Do you want to insert a new user?',
-      [
-        { text: 'Not', style: 'cancel' }, // style - only IOS
-        { text: 'Yes', onPress: () => this.createUserWithEmailAndPassword() }
-      ],
-      { cancelable: false }
-    )
-  }
-
   tryLogin () {
     this.setState({ isLoading: true })
 
     const { email, password } = this.state
+    const { tryLogin } = this.props
 
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
+    tryLogin({ email, password })
       .then(user => {
-        this.setState({ errorCode: '' })
-      })
-      .catch(error => {
-        if (error.code === 'auth/user-not-found') {
-          this.showAlert()
+        if (user) {
+          this.props.navigation.replace('Main')
         }
 
-        this.setState({ errorCode: error.code })
-      })
-      .finally(() => this.setState({ isLoading: false }))
-  }
-
-  createUserWithEmailAndPassword () {
-    const { email, password } = this.state
-
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(user => {
-        this.setState({ errorCode: '' })
+        this.setState({
+          isLoading: false,
+          errorCode: ''
+        })
       })
       .catch(error => {
         this.setState({
-          errorCode: error.code
+          isLoading: false,
+          errorCode: this.getMessageByErrorCode(error.code)
         })
       })
   }
@@ -120,7 +96,7 @@ export default class LoginPage extends Component {
         }
         {!!errorCode &&
           <ErrorMessage
-            message={this.getMessageByErrorCode(errorCode)}
+            message={errorCode}
           />
         }
       </View>
@@ -134,3 +110,9 @@ const styles = StyleSheet.create({
     paddingRight: 10
   }
 })
+
+const mapDispatchToProps = {
+  tryLogin
+}
+
+export default connect(null, mapDispatchToProps)(LoginPage)

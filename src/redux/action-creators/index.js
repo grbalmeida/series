@@ -1,10 +1,45 @@
-import { USER_LOGIN, USER_LOGOUT } from '../actions'
+import { Alert } from 'react-native'
+import firebase from '../../services/firebase'
+import { USER_LOGIN_SUCCESS } from '../actions'
 
-export const userLogin = user => ({
-  type: USER_LOGIN,
+const userLoginSuccess = user => ({
+  type: USER_LOGIN_SUCCESS,
   user
 })
 
-export const userLogout = ({
-  type: USER_LOGOUT
-})
+export const tryLogin = ({ email, password }) => dispatch => {
+  return firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(user => {
+      const action = userLoginSuccess(user)
+      dispatch(action)
+      return user
+    })
+    .catch(error => {
+      if (error.code === 'auth/user-not-found') {
+        return new Promise((resolve, reject) => {
+          Alert.alert(
+            'User not found',
+            'Do you want to insert a new user?',
+            [{
+              text: 'No',
+              onPress: () => resolve(),
+              style: 'cancel' // IOS
+            }, {
+              text: 'Yes',
+              onPress: () => {
+                firebase
+                  .auth()
+                  .createUserWithEmailAndPassword(email, password)
+                  .then(resolve)
+                  .catch(reject)
+              }
+            }],
+            { cancelable: false }
+          )
+        })
+      }
+      return Promise.reject(error)
+    })
+}

@@ -4,6 +4,7 @@ import {
 } from 'react-navigation'
 
 import LoginPage from './pages/LoginPage'
+import SeriesPage from './pages/SeriesPage'
 
 const routeConfig = {
   'Login': {
@@ -11,6 +12,9 @@ const routeConfig = {
     navigationOptions: {
       title: 'Welcome'
     }
+  },
+  'Main': {
+    screen: SeriesPage
   }
 }
 
