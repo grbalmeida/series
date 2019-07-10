@@ -3,13 +3,21 @@ import {
   View,
   Text,
   StyleSheet,
-  Dimensions
+  Dimensions,
+  Image
 } from 'react-native'
 import PropTypes from 'prop-types'
 
 const SerieCard = ({ serie }) => (
   <View style={styles.container}>
     <View style={styles.card}>
+      <Image
+        source={{
+          uri: serie.img
+        }}
+        aspectRatio={1}
+        resizeMode='cover'
+      />
       <Text>{`${serie.id} - ${serie.title}`}</Text>
     </View>
   </View>
