@@ -19,8 +19,10 @@ const routeConfig = {
   },
   'SerieDetail': {
     screen: SerieDetailPage,
-    navigationOptions: {
-      title: 'SerieDetailPage'
+    navigationOptions: ({ navigation }) => {
+      const { title } = navigation.state.params.serie
+
+      return { title }
     }
   }
 }
