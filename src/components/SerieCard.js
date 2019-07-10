@@ -4,15 +4,18 @@ import {
   Text,
   StyleSheet,
   Dimensions,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native'
 import PropTypes from 'prop-types'
 
-const SerieCard = ({ serie, isFirstColumn }) => (
-  <View style={[
-    styles.container,
-    isFirstColumn ? styles.firstColumn : styles.lastColumn
-  ]}>
+const SerieCard = ({ serie, isFirstColumn, onNavigate }) => (
+  <TouchableOpacity
+    onPress={onNavigate}
+    style={[
+      styles.container,
+      isFirstColumn ? styles.firstColumn : styles.lastColumn
+    ]}>
     <View style={styles.card}>
       <Image
         source={{
@@ -25,7 +28,7 @@ const SerieCard = ({ serie, isFirstColumn }) => (
         <Text style={styles.cardTitle}>{serie.title}</Text>
       </View>
     </View>
-  </View>
+  </TouchableOpacity>
 )
 
 const styles = StyleSheet.create({
@@ -66,7 +69,8 @@ const styles = StyleSheet.create({
 
 SerieCard.propTypes = {
   serie: PropTypes.object.isRequired,
-  isFirstColumn: PropTypes.bool
+  isFirstColumn: PropTypes.bool.isRequired,
+  onNavigate: PropTypes.func.isRequired
 }
 
 export default SerieCard

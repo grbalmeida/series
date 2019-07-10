@@ -5,7 +5,7 @@ import SerieCard from '../components/SerieCard'
 import series from '../fake-data/series.json'
 import isEven from '../util'
 
-const SeriesPage = () => (
+const SeriesPage = props => (
   <View>
     <FlatList
       data={series}
@@ -13,6 +13,7 @@ const SeriesPage = () => (
         <SerieCard
           serie={item}
           isFirstColumn={isEven(index)}
+          onNavigate={() => props.navigation.navigate('SerieDetail', { serie: item })}
         />
       )}
       keyExtractor={item => `${item.id}`}

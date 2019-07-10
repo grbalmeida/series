@@ -5,6 +5,7 @@ import {
 
 import LoginPage from './pages/LoginPage'
 import SeriesPage from './pages/SeriesPage'
+import SerieDetailPage from './pages/SerieDetailPage'
 
 const routeConfig = {
   'Main': {
@@ -14,6 +15,12 @@ const routeConfig = {
     screen: LoginPage,
     navigationOptions: {
       title: 'Welcome'
+    }
+  },
+  'SerieDetail': {
+    screen: SerieDetailPage,
+    navigationOptions: {
+      title: 'SerieDetailPage'
     }
   }
 }
