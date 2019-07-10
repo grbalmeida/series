@@ -7,14 +7,14 @@ import LoginPage from './pages/LoginPage'
 import SeriesPage from './pages/SeriesPage'
 
 const routeConfig = {
+  'Main': {
+    screen: SeriesPage
+  },
   'Login': {
     screen: LoginPage,
     navigationOptions: {
       title: 'Welcome'
     }
-  },
-  'Main': {
-    screen: SeriesPage
   }
 }
 
