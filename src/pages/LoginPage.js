@@ -77,6 +77,8 @@ class LoginPage extends Component {
             placeholder='Email'
             value={email}
             onChangeText={email => this.onChangeHandler('email', email)}
+            keyboardType='email-address'
+            autoCapitalize='none'
           />
         </FormRow>
         <FormRow last>
