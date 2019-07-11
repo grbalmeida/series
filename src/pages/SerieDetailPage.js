@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { ScrollView, Image, StyleSheet } from 'react-native'
 
 import Line from '../components/Line'
+import LongText from '../components/LongText'
 
 export default class SerieDetailPage extends Component {
   render () {
@@ -23,7 +24,7 @@ export default class SerieDetailPage extends Component {
           label='Gender'
           content={serie.gender}
         />
-        <Line
+        <LongText
           label='Description'
           content={serie.description}
         />
