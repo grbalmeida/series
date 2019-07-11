@@ -3,9 +3,14 @@ import {
   Text,
   View,
   StyleSheet,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  NativeModules,
+  LayoutAnimation
 } from 'react-native'
 import PropTypes from 'prop-types'
+
+NativeModules.UIManager.setLayoutAnimationEnabledExperimental &&
+NativeModules.UIManager.setLayoutAnimationEnabledExperimental(true)
 
 export default class LongText extends Component {
   constructor (props) {
@@ -14,6 +19,10 @@ export default class LongText extends Component {
     this.state = {
       isExpanded: true
     }
+  }
+
+  componentDidUpdate () {
+    LayoutAnimation.spring()
   }
 
   toggleIsExpanded () {
