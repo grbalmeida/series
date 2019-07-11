@@ -3,7 +3,6 @@ import { View, FlatList, StyleSheet } from 'react-native'
 
 import SerieCard from '../components/SerieCard'
 import series from '../fake-data/series.json'
-import isEven from '../util'
 
 const SeriesPage = props => (
   <View>
@@ -12,7 +11,7 @@ const SeriesPage = props => (
       renderItem={({ item, index }) => (
         <SerieCard
           serie={item}
-          isFirstColumn={isEven(index)}
+          isFirstColumn={index % 2 === 0}
           onNavigate={() => props.navigation.navigate('SerieDetail', { serie: item })}
         />
       )}

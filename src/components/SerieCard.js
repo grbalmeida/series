@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingTop: 10,
     paddingBottom: 10,
-    paddingLef: 3,
+    paddingLeft: 3,
     paddingRight: 3,
     alignItems: 'center'
   },

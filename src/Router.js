@@ -11,18 +11,20 @@ const routeConfig = {
   'Main': {
     screen: SeriesPage
   },
+  'SerieDetail': {
+    screen: SerieDetailPage,
+    navigationOptions: ({ navigation }) => {
+      const { serie } = navigation.state.params
+
+      return {
+        title: serie.title
+      }
+    }
+  },
   'Login': {
     screen: LoginPage,
     navigationOptions: {
       title: 'Welcome'
-    }
-  },
-  'SerieDetail': {
-    screen: SerieDetailPage,
-    navigationOptions: ({ navigation }) => {
-      const { title } = navigation.state.params.serie
-
-      return { title }
     }
   }
 }

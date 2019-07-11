@@ -29,7 +29,9 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 3,
-    textAlign: 'justify' // IOS
+    textAlign: 'justify', // IOS
+    paddingLeft: 10,
+    paddingRight: 10
   }
 })
 
