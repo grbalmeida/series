@@ -1,20 +1,33 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { ScrollView, Image, StyleSheet } from 'react-native'
+
+import Line from '../components/Line'
 
 export default class SerieDetailPage extends Component {
   render () {
     const { serie } = this.props.navigation.state.params
 
     return (
-      <View>
+      <ScrollView>
         <Image
           style={styles.image}
           source={{
             uri: serie.img
           }}
         />
-        <Text>SerieDetailPage</Text>
-      </View>
+        <Line
+          label='Title'
+          content={serie.title}
+        />
+        <Line
+          label='Gender'
+          content={serie.gender}
+        />
+        <Line
+          label='Description'
+          content={serie.description}
+        />
+      </ScrollView>
     )
   }
 }
