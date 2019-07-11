@@ -1,16 +1,39 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import PropTypes from 'prop-types'
 
-const LongText = ({ label = '', content = '-' }) => (
-  <View style={styles.line}>
-    <Text style={[
-      styles.cell,
-      styles.label
-    ]}>{label}</Text>
-    <Text style={[styles.cell, styles.content]}>{content}</Text>
-  </View>
-)
+export default class LongText extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      isExpanded: true
+    }
+  }
+
+  render () {
+    const { label = '', content = '-' } = this.props
+    const { isExpanded } = this.state
+
+    return (
+      <View style={styles.line}>
+        <Text style={[
+          styles.cell,
+          styles.label
+        ]}>
+          {label}
+        </Text>
+        <Text style={[
+          styles.cell,
+          styles.content,
+          isExpanded ? styles.collapsed : null
+        ]}>
+          {content}
+        </Text>
+      </View>
+    )
+  }
+}
 
 const styles = StyleSheet.create({
   line: {
@@ -32,6 +55,9 @@ const styles = StyleSheet.create({
     textAlign: 'justify', // IOS
     paddingLeft: 10,
     paddingRight: 10
+  },
+  collapsed: {
+    maxHeight: 65
   }
 })
 
@@ -39,5 +65,3 @@ LongText.propTypes = {
   label: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired
 }
-
-export default LongText
