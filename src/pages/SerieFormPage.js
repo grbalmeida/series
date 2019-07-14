@@ -1,9 +1,18 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
+
+import Input from '../components/Input'
+import FormRow from '../components/FormRow'
 
 const SerieFormPage = (
   <View>
-    <Text>SerieFormPage</Text>
+    <FormRow first>
+      <Input
+        placeholder='Title'
+        value=''
+        onChangeText={value => console.log(value)}
+      />
+    </FormRow>
   </View>
 )
 
