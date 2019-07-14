@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Picker } from 'react-native'
+import { View, Picker, Slider } from 'react-native'
 import { connect } from 'react-redux'
 
 import Input from '../components/Input'
@@ -7,7 +7,7 @@ import FormRow from '../components/FormRow'
 import { setField } from '../redux/action-creators'
 
 const SerieFormPage = ({ serieForm, setField }) => {
-  const { title, img, gender } = serieForm
+  const { title, img, gender, rate } = serieForm
 
   return (
     <View>
@@ -43,6 +43,14 @@ const SerieFormPage = ({ serieForm, setField }) => {
             value='horror'
           />
         </Picker>
+      </FormRow>
+      <FormRow>
+        <Slider
+          onValueChange={value => setField('rate', value)}
+          value={rate}
+          minimumValue={0} // default is already 0
+          maximumValue={100} // default is 1
+        />
       </FormRow>
     </View>
   )
