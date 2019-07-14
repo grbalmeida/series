@@ -1,6 +1,8 @@
 import React from 'react'
 import {
   View,
+  ScrollView,
+  KeyboardAvoidingView,
   Text,
   Picker,
   Slider,
@@ -17,67 +19,73 @@ const SerieFormPage = ({ serieForm, setField }) => {
   const { title, img, gender, rate, description } = serieForm
 
   return (
-    <View>
-      <FormRow first>
-        <Input
-          placeholder='Title'
-          value={title}
-          onChangeText={value => setField('title', value)}
-        />
-      </FormRow>
-      <FormRow>
-        <Input
-          placeholder='Image URL'
-          value={img}
-          onChangeText={value => setField('img', value)}
-        />
-      </FormRow>
-      <FormRow>
-        <Picker
-          selectedValue={gender}
-          onValueChange={itemValue => setField('gender', itemValue)}
-        >
-          <Picker.Item
-            label='Police'
-            value='police'
+    <KeyboardAvoidingView
+      keyboardVerticalOffset={150}
+      behavior='padding'
+      enabled
+    >
+      <ScrollView>
+        <FormRow first>
+          <Input
+            placeholder='Title'
+            value={title}
+            onChangeText={value => setField('title', value)}
           />
-          <Picker.Item
-            label='Comedy'
-            value='comedy'
+        </FormRow>
+        <FormRow>
+          <Input
+            placeholder='Image URL'
+            value={img}
+            onChangeText={value => setField('img', value)}
           />
-          <Picker.Item
-            label='Horror'
-            value='horror'
+        </FormRow>
+        <FormRow>
+          <Picker
+            selectedValue={gender}
+            onValueChange={itemValue => setField('gender', itemValue)}
+          >
+            <Picker.Item
+              label='Police'
+              value='police'
+            />
+            <Picker.Item
+              label='Comedy'
+              value='comedy'
+            />
+            <Picker.Item
+              label='Horror'
+              value='horror'
+            />
+          </Picker>
+        </FormRow>
+        <FormRow>
+          <View style={styles.sameRow}>
+            <Text>Rate:</Text>
+            <Text>{rate}</Text>
+          </View>
+          <Slider
+            onValueChange={value => setField('rate', value)}
+            value={rate}
+            minimumValue={0} // default is already 0
+            maximumValue={100} // default is 1
+            step={5}
           />
-        </Picker>
-      </FormRow>
-      <FormRow>
-        <View style={styles.sameRow}>
-          <Text>Rate:</Text>
-          <Text>{rate}</Text>
-        </View>
-        <Slider
-          onValueChange={value => setField('rate', value)}
-          value={rate}
-          minimumValue={0} // default is already 0
-          maximumValue={100} // default is 1
-          step={5}
+        </FormRow>
+        <FormRow>
+          <Input
+            placeholder='Description'
+            value={description}
+            onChangeText={value => setField('description', value)}
+            numberOfLines={4}
+            multiline
+          />
+        </FormRow>
+        <Button
+          title='Save'
+          onPress={() => console.log(serieForm)}
         />
-      </FormRow>
-      <FormRow>
-        <Input
-          placeholder='Description'
-          value={description}
-          onChangeText={value => setField('description', value)}
-          numberOfLines={4}
-          multiline
-        />
-      </FormRow>
-      <Button
-        title='Save'
-        onPress={() => console.log(serieForm)}
-      />
-    </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   )
 }
 
