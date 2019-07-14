@@ -9,6 +9,12 @@ import SerieFormPage from './pages/SerieFormPage'
 import SeriesPage from './pages/SeriesPage'
 
 const routeConfig = {
+  'Login': {
+    screen: LoginPage,
+    navigationOptions: {
+      title: 'Welcome'
+    }
+  },
   'Main': {
     screen: SeriesPage
   },
@@ -26,12 +32,6 @@ const routeConfig = {
     screen: SerieFormPage,
     navigationOptions: {
       title: 'New series'
-    }
-  },
-  'Login': {
-    screen: LoginPage,
-    navigationOptions: {
-      title: 'Welcome'
     }
   }
 }

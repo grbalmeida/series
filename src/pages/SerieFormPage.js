@@ -13,9 +13,9 @@ import { connect } from 'react-redux'
 
 import Input from '../components/Input'
 import FormRow from '../components/FormRow'
-import { setField } from '../redux/action-creators'
+import { setField, saveSerie } from '../redux/action-creators'
 
-const SerieFormPage = ({ serieForm, setField }) => {
+const SerieFormPage = ({ serieForm, setField, saveSerie }) => {
   const { title, img, gender, rate, description } = serieForm
 
   return (
@@ -82,7 +82,7 @@ const SerieFormPage = ({ serieForm, setField }) => {
         </FormRow>
         <Button
           title='Save'
-          onPress={() => console.log(serieForm)}
+          onPress={() => saveSerie(serieForm)}
         />
       </ScrollView>
     </KeyboardAvoidingView>
@@ -104,7 +104,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  setField
+  setField,
+  saveSerie
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SerieFormPage)

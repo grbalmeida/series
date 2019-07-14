@@ -1,6 +1,10 @@
 import { Alert } from 'react-native'
 import firebase from '../../services/firebase'
-import { USER_LOGIN_SUCCESS, SET_FIELD } from '../actions'
+import {
+  USER_LOGIN_SUCCESS,
+  SET_FIELD,
+  SAVE_SERIE
+} from '../actions'
 
 const userLoginSuccess = user => ({
   type: USER_LOGIN_SUCCESS,
@@ -51,3 +55,8 @@ export const setField = (field, value) => {
     value
   }
 }
+
+export const saveSerie = serie => ({
+  type: SAVE_SERIE,
+  serie
+})
