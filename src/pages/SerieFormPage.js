@@ -13,7 +13,7 @@ import FormRow from '../components/FormRow'
 import { setField } from '../redux/action-creators'
 
 const SerieFormPage = ({ serieForm, setField }) => {
-  const { title, img, gender, rate } = serieForm
+  const { title, img, gender, rate, description } = serieForm
 
   return (
     <View>
@@ -61,6 +61,15 @@ const SerieFormPage = ({ serieForm, setField }) => {
           minimumValue={0} // default is already 0
           maximumValue={100} // default is 1
           step={5}
+        />
+      </FormRow>
+      <FormRow>
+        <Input
+          placeholder='Description'
+          value={description}
+          onChangeText={value => setField('description', value)}
+          numberOfLines={4}
+          multiline
         />
       </FormRow>
     </View>
