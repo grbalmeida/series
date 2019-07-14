@@ -4,7 +4,8 @@ import {
   Text,
   Picker,
   Slider,
-  StyleSheet
+  StyleSheet,
+  Button
 } from 'react-native'
 import { connect } from 'react-redux'
 
@@ -72,6 +73,10 @@ const SerieFormPage = ({ serieForm, setField }) => {
           multiline
         />
       </FormRow>
+      <Button
+        title='Save'
+        onPress={() => console.log(serieForm)}
+      />
     </View>
   )
 }
