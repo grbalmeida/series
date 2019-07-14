@@ -1,10 +1,21 @@
 import { SET_FIELD } from '../actions'
 
-export default function (state = {}, action) {
+const INITIAL_STATE = {
+  id: null,
+  title: '',
+  gender: '',
+  rate: 0,
+  img: '',
+  description: ''
+}
+
+export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case SET_FIELD:
-      break
+      const newState = { ...state }
+      newState[action.field] = action.value
+      return newState
     default:
-      return {}
+      return state
   }
 }
