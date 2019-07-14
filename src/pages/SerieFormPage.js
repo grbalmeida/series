@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Picker, StyleSheet } from 'react-native'
+import { View, Picker } from 'react-native'
 import { connect } from 'react-redux'
 
 import Input from '../components/Input'
@@ -25,34 +25,28 @@ const SerieFormPage = ({ serieForm, setField }) => {
           onChangeText={value => setField('img', value)}
         />
       </FormRow>
-      <Picker
-        selectedValue={gender}
-        style={styles.picker}
-        onValueChange={itemValue => setField('gender', itemValue)}
-      >
-        <Picker.Item
-          label='Police'
-          value='police'
-        />
-        <Picker.Item
-          label='Comedy'
-          value='comedy'
-        />
-        <Picker.Item
-          label='Horror'
-          value='horror'
-        />
-      </Picker>
+      <FormRow>
+        <Picker
+          selectedValue={gender}
+          onValueChange={itemValue => setField('gender', itemValue)}
+        >
+          <Picker.Item
+            label='Police'
+            value='police'
+          />
+          <Picker.Item
+            label='Comedy'
+            value='comedy'
+          />
+          <Picker.Item
+            label='Horror'
+            value='horror'
+          />
+        </Picker>
+      </FormRow>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  picker: {
-    height: 50,
-    width: 100
-  }
-})
 
 const mapStateToProps = state => ({
   serieForm: state.serieForm
