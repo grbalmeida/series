@@ -8,7 +8,7 @@ import FormRow from '../components/FormRow'
 import { setField } from '../redux/action-creators'
 
 const SerieFormPage = ({ serieForm, setField }) => {
-  const { title } = serieForm
+  const { title, img } = serieForm
 
   return (
     <View>
@@ -17,6 +17,13 @@ const SerieFormPage = ({ serieForm, setField }) => {
           placeholder='Title'
           value={title}
           onChangeText={value => setField('title', value)}
+        />
+      </FormRow>
+      <FormRow>
+        <Input
+          placeholder='Image URL'
+          value={img}
+          onChangeText={value => setField('img', value)}
         />
       </FormRow>
     </View>
