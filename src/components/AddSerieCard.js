@@ -1,19 +1,34 @@
 import React from 'react'
 import {
   View,
-  Text,
   StyleSheet,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native'
+import PropTypes from 'prop-types'
 
-const AddSerieCard = () => (
-  <TouchableOpacity>
+const AddSerieCard = ({ isFirstColumn, onPress }) => (
+  <TouchableOpacity
+    onPress={onPress}
+    style={[
+      styles.container,
+      isFirstColumn ? styles.firstColumn : styles.lastColumn
+    ]}
+  >
     <View style={styles.card}>
-      <Text>Add Serie Card</Text>
+      <Image
+        source={require('../../resources/add.png')}
+        style={styles.image}
+      />
     </View>
   </TouchableOpacity>
 )
+
+AddSerieCard.propTypes = {
+  isFirstColumn: PropTypes.bool.isRequired,
+  onPress: PropTypes.func.isRequired
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -24,6 +39,10 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     borderWidth: 1
+  },
+  image: {
+    width: '100%',
+    height: '100%'
   },
   firstColumn: {
     paddingLeft: 10
