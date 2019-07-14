@@ -21,7 +21,7 @@ export default class LongText extends Component {
     }
   }
 
-  componentDidUpdate () {
+  componentWillUpdate () {
     LayoutAnimation.spring()
   }
 
