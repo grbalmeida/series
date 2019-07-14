@@ -1,6 +1,6 @@
 import { Alert } from 'react-native'
 import firebase from '../../services/firebase'
-import { USER_LOGIN_SUCCESS } from '../actions'
+import { USER_LOGIN_SUCCESS, SET_FIELD } from '../actions'
 
 const userLoginSuccess = user => ({
   type: USER_LOGIN_SUCCESS,
@@ -42,4 +42,12 @@ export const tryLogin = ({ email, password }) => dispatch => {
       }
       return Promise.reject(error)
     })
+}
+
+export const setField = (field, value) => {
+  return {
+    type: SET_FIELD,
+    field,
+    value
+  }
 }
