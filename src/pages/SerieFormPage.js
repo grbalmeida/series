@@ -1,5 +1,11 @@
 import React from 'react'
-import { View, Picker, Slider } from 'react-native'
+import {
+  View,
+  Text,
+  Picker,
+  Slider,
+  StyleSheet
+} from 'react-native'
 import { connect } from 'react-redux'
 
 import Input from '../components/Input'
@@ -45,16 +51,31 @@ const SerieFormPage = ({ serieForm, setField }) => {
         </Picker>
       </FormRow>
       <FormRow>
+        <View style={styles.sameRow}>
+          <Text>Rate:</Text>
+          <Text>{rate}</Text>
+        </View>
         <Slider
           onValueChange={value => setField('rate', value)}
           value={rate}
           minimumValue={0} // default is already 0
           maximumValue={100} // default is 1
+          step={5}
         />
       </FormRow>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  sameRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 10
+  }
+})
 
 const mapStateToProps = state => ({
   serieForm: state.serieForm
