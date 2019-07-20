@@ -15,7 +15,12 @@ import Input from '../components/Input'
 import FormRow from '../components/FormRow'
 import { setField, saveSerie } from '../redux/action-creators'
 
-const SerieFormPage = ({ serieForm, setField, saveSerie }) => {
+const SerieFormPage = ({
+  serieForm,
+  setField,
+  saveSerie,
+  navigation
+}) => {
   const { title, img, gender, rate, description } = serieForm
 
   return (
@@ -82,7 +87,12 @@ const SerieFormPage = ({ serieForm, setField, saveSerie }) => {
         </FormRow>
         <Button
           title='Save'
-          onPress={() => saveSerie(serieForm)}
+          onPress={() => {
+            saveSerie(serieForm)
+              .then(() => {
+                navigation.goBack()
+              })
+          }}
         />
       </ScrollView>
     </KeyboardAvoidingView>
