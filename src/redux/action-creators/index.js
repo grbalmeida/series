@@ -2,7 +2,8 @@ import { Alert } from 'react-native'
 import firebase from '../../services/firebase'
 import {
   USER_LOGIN_SUCCESS,
-  SET_FIELD
+  SET_FIELD,
+  SERIE_SAVED_SUCCESS
 } from '../actions'
 
 const userLoginSuccess = user => ({
@@ -55,6 +56,10 @@ export const setField = (field, value) => {
   }
 }
 
+const serieSavedSuccess = () => ({
+  type: SERIE_SAVED_SUCCESS
+})
+
 export const saveSerie = serie => {
   const { uid } = firebase
     .auth()
@@ -65,5 +70,6 @@ export const saveSerie = serie => {
       .database()
       .ref(`/users/${uid}/series`)
       .push(serie)
+      .then(() => dispatch(serieSavedSuccess()))
   }
 }
