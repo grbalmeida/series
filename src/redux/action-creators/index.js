@@ -60,8 +60,10 @@ export const saveSerie = serie => {
     .auth()
     .currentUser
 
-  firebase
-    .database()
-    .ref(`/users/${uid}/series`)
-    .push(serie)
+  return async dispatch => {
+    await firebase
+      .database()
+      .ref(`/users/${uid}/series`)
+      .push(serie)
+  }
 }
